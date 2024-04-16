@@ -20,10 +20,6 @@ public class CustomerTests {
     @Test
     public void testGetAllCustomers() {
         List<Customer> customers = customerMapper.getAllCustomers();
-        System.out.println("Number of customers retrieved: " + customers.size());
-        for (Customer customer : customers) {
-            System.out.println("Customer: " + customer);
-        }
         Assertions.assertNotNull(customers);
     }
 
