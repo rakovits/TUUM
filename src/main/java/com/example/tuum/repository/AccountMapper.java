@@ -16,9 +16,6 @@ public interface AccountMapper {
     @Select("SELECT * FROM accounts WHERE customerId = #{customerId}")
     List<Account> getAccountsByCustomerId(Long customerId);
 
-    @Select("SELECT a.* FROM accounts a JOIN customers c ON a.customerId = c.id WHERE c.firstName = #{firstName} AND c.lastName = #{lastName}")
-    List<Account> getAccountsByCustomerName(@Param("firstName") String firstName, @Param("lastName") String lastName);
-
     @Insert("INSERT INTO accounts (customerId, country) VALUES (#{customerId}, #{country})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void saveAccount(Account account);

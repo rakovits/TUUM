@@ -19,9 +19,6 @@ public interface CustomerMapper {
     @Insert("INSERT INTO customers (firstName, lastName) VALUES (#{firstName}, #{lastName})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void saveCustomer(Customer customer);
-
-    // Should I add delete and change options as well?
-
 }
 
 
