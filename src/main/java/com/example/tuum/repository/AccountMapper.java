@@ -1,7 +1,10 @@
 package com.example.tuum.repository;
 
 import com.example.tuum.domain.Account;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
 
 import java.util.List;
 
