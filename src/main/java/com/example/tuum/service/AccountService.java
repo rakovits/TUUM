@@ -1,7 +1,5 @@
 package com.example.tuum.service;
 
-import com.example.tuum.domain.Balance;
-import com.example.tuum.repository.BalanceMapper;
 import com.example.tuum.utility.CurrencyValidator;
 import com.example.tuum.domain.Account;
 import com.example.tuum.exceptions.AccountNotFoundException;
@@ -13,9 +11,14 @@ import java.util.List;
 
 @Service
 public class AccountService {
+    private final AccountMapper accountMapper;
+    private final BalanceService balanceService;
+
     @Autowired
-    private AccountMapper accountMapper;
-    private BalanceMapper balanceMapper;
+    public AccountService(AccountMapper accountMapper, BalanceService balanceService) {
+        this.accountMapper = accountMapper;
+        this.balanceService = balanceService;
+    }
 
     public Account createAccount(Long customerId, String country, List<String> currencies) {
 
@@ -29,11 +32,7 @@ public class AccountService {
         Long accountId = account.getId();
 
         for (String currency : currencies) {
-            Balance balance = new Balance();
-            balance.setAccountId(accountId);
-            balance.setCurrency(currency);
-            balance.setAvailableAmount(0.0);
-            balanceMapper.saveBalance(balance);
+            balanceService.saveBalance(accountId, currency, 0.0);
         }
 
         return account;
