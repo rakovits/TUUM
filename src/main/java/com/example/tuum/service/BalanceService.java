@@ -12,8 +12,8 @@ public class BalanceService {
         this.balanceMapper = balanceMapper;
     }
 
-    public Balance saveBalance(Long accountId, String currency, Double availableAmount) {
-        Balance balance = new Balance(accountId, currency, availableAmount);
+    public Balance createBalance(Long accountId, String currency) {
+        Balance balance = new Balance(accountId, currency, 0.0);
         balanceMapper.saveBalance(balance);
 
         return balance;

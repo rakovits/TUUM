@@ -6,7 +6,10 @@ import com.example.tuum.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping("/accounts")
@@ -18,6 +21,8 @@ public class AccountController {
         this.accountService = accountService;
     }
 
+    // TO-DO: createAccount
+
     @GetMapping("/{accountId}")
     public ResponseEntity<Account> getAccountById(@PathVariable Long accountId) {
         try {
@@ -27,5 +32,4 @@ public class AccountController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
 }

@@ -1,5 +1,7 @@
 package com.example.tuum.service;
 
+import com.example.tuum.exceptions.InvalidCurrencyException;
+import com.example.tuum.exceptions.InvalidResourceFieldException;
 import com.example.tuum.utility.CurrencyValidator;
 import com.example.tuum.domain.Account;
 import com.example.tuum.exceptions.AccountNotFoundException;
@@ -21,9 +23,12 @@ public class AccountService {
     }
 
     public Account createAccount(Long customerId, String country, List<String> currencies) {
-
         for (String currency : currencies) {
-            CurrencyValidator.validateCurrency(currency);
+            try {
+                CurrencyValidator.validateCurrency(currency);
+            } catch (InvalidCurrencyException e) {
+                throw new InvalidResourceFieldException("Account not created due to invalid currency: " + currency + ". List of valid currencies: EUR, SEK, GBP, USD.");
+            }
         }
 
         Account account = new Account(customerId, country);
@@ -32,7 +37,7 @@ public class AccountService {
         Long accountId = account.getId();
 
         for (String currency : currencies) {
-            balanceService.saveBalance(accountId, currency, 0.0);
+            balanceService.createBalance(accountId, currency);
         }
 
         return account;
