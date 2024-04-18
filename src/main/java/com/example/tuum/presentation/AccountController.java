@@ -8,12 +8,7 @@ import com.example.tuum.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/accounts")
@@ -26,22 +21,15 @@ public class AccountController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Account> createAccount(@RequestBody AccountDTO accountDTO) {
-        try {
-            Account account = accountService.createAccount(accountDTO.getCustomerId(), accountDTO.getCountry(), accountDTO.getCurrencies());
-            return new ResponseEntity<>(account, HttpStatus.CREATED);
-        } catch (InvalidResourceFieldException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<Account> createAccount(@RequestBody AccountDTO accountDTO) throws InvalidResourceFieldException {
+        Account account = accountService.createAccount(accountDTO.getCustomerId(), accountDTO.getCountry(), accountDTO.getCurrencies());
+        return new ResponseEntity<>(account, HttpStatus.CREATED);
     }
 
+
     @GetMapping("/{accountId}")
-    public ResponseEntity<Account> getAccountById(@PathVariable Long accountId) {
-        try {
-            Account account = accountService.getAccountById(accountId);
-            return new ResponseEntity<>(account, HttpStatus.OK);
-        } catch (AccountNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<Account> getAccountById(@PathVariable Long accountId) throws AccountNotFoundException {
+        Account account = accountService.getAccountById(accountId);
+        return new ResponseEntity<>(account, HttpStatus.OK);
     }
 }
