@@ -33,9 +33,12 @@ public class BalanceService {
     }
 
     public List<Balance> getBalancesByAccountId(Long accountId) {
-        List<Balance> balances = balanceMapper.getBalancesByAccountId(accountId);
 
-        return balances;
+        return balanceMapper.getBalancesByAccountId(accountId);
+    }
+
+    public Balance getBalanceById(Long balanceId) {
+        return balanceMapper.getBalanceById(balanceId);
     }
 
     public void updateBalance(Balance balance) {

@@ -2,25 +2,16 @@ package com.example.tuum.repository;
 
 import com.example.tuum.domain.Customer;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
-
-import java.util.List;
+import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface CustomerMapper {
-    @Select("SELECT * FROM customers")
-    List<Customer> getAllCustomers();
-
     @Select("SELECT * FROM customers WHERE id = #{id}")
     Customer getCustomerById(Long id);
 
-    @Select("SELECT * FROM customers WHERE firstName = #{firstName} AND lastName = #{lastName}")
-    Customer getCustomerByName(@Param("firstName") String firstName, @Param("lastName") String lastName);
-
-    @Insert("INSERT INTO customers (firstName, lastName) VALUES (#{firstName}, #{lastName})")
+    @Insert("INSERT INTO customers (id) VALUES (#{id})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void saveCustomer(Customer customer);
 }

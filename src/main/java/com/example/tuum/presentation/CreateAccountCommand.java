@@ -1,28 +1,24 @@
-package com.example.tuum.dtos;
+package com.example.tuum.presentation;
 
 import java.util.List;
 
-public class AccountDTO {
-    private Long CustomerId;
+public class CreateAccountCommand {
+    private Long customerId;
     private String country;
     private List<String> currencies;
 
-    public AccountDTO() {
-
-    }
-
-    public AccountDTO(Long customerId, String country, List<String> currencies) {
-        CustomerId = customerId;
+    public CreateAccountCommand(Long customerId, String country, List<String> currencies) {
+        this.customerId = customerId;
         this.country = country;
         this.currencies = currencies;
     }
 
     public Long getCustomerId() {
-        return CustomerId;
+        return customerId;
     }
 
     public void setCustomerId(Long customerId) {
-        CustomerId = customerId;
+        this.customerId = customerId;
     }
 
     public String getCountry() {

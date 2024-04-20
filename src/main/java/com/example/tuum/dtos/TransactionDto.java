@@ -1,22 +1,20 @@
 package com.example.tuum.dtos;
 
-public class TransactionDTO {
+public class TransactionDto {
     private Long transactionId;
     private Long accountId;
     private Double transactionAmount;
     private String currency;
     private String directionOfTransaction;
     private String transactionDescription;
-    private Double availableAmountAfterTransaction;
 
-    public TransactionDTO(Long transactionId, Long accountId, Double transactionAmount, String currency, String directionOfTransaction, String description, Double availableAmountAfterTransaction) {
+    public TransactionDto(Long transactionId, Long accountId, Double transactionAmount, String currency, String directionOfTransaction, String description) {
         this.transactionId = transactionId;
         this.accountId = accountId;
         this.transactionAmount = transactionAmount;
         this.currency = currency;
         this.directionOfTransaction = directionOfTransaction;
         this.transactionDescription = description;
-        this.availableAmountAfterTransaction = availableAmountAfterTransaction;
     }
 
     public Long getAccountId() {
@@ -57,14 +55,6 @@ public class TransactionDTO {
 
     public void setTransactionId(Long transactionId) {
         this.transactionId = transactionId;
-    }
-
-    public Double getAvailableAmountAfterTransaction() {
-        return availableAmountAfterTransaction;
-    }
-
-    public void setAvailableAmountAfterTransaction(Double availableAmountAfterTransaction) {
-        this.availableAmountAfterTransaction = availableAmountAfterTransaction;
     }
 
     public String getTransactionDescription() {

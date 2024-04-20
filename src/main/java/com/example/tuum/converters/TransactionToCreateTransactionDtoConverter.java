@@ -2,20 +2,21 @@ package com.example.tuum.converters;
 
 import com.example.tuum.domain.Balance;
 import com.example.tuum.domain.Transaction;
-import com.example.tuum.dtos.TransactionDto;
+import com.example.tuum.dtos.CreateTransactionDto;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TransactionToTransactionDtoConverter {
+public class TransactionToCreateTransactionDtoConverter {
 
-    public TransactionDto convertTransactionToTransactionDTO(Transaction transaction, Balance balance) {
-        return new TransactionDto(
+    public CreateTransactionDto convertTransactionToCreateTransactionDTO(Transaction transaction, Balance balance) {
+        return new CreateTransactionDto(
                 transaction.getId(),
                 balance.getAccountId(),
                 transaction.getTransactionAmount(),
                 balance.getCurrency(),
                 transaction.getDirectionOfTransaction(),
-                transaction.getTransactionDescription()
+                transaction.getTransactionDescription(),
+                balance.getAvailableAmount()
         );
     }
 }

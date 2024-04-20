@@ -12,9 +12,6 @@ import java.util.List;
 
 @Mapper
 public interface BalanceMapper {
-    @Select("SELECT * FROM balances")
-    List<Balance> getAllBalances();
-
     @Select("SELECT * FROM balances WHERE id = #{id}")
     Balance getBalanceById(Long id);
 

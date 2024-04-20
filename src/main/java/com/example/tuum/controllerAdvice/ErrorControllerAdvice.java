@@ -12,12 +12,26 @@ import org.springframework.web.context.request.WebRequest;
 public class ErrorControllerAdvice {
 
     @ExceptionHandler(InvalidResourceFieldException.class)
-    public ResponseEntity<String> handleInvalidResourceFieldException(InvalidResourceFieldException e, WebRequest webRequest) {
-        return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
+    public ResponseEntity<String> handleInvalidResourceFieldException(InvalidResourceFieldException e) {
+        ErrorMessage errorMessage = new ErrorMessage(e.getMessage());
+        return new ResponseEntity<>(errorMessage.message, HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     @ExceptionHandler(AccountNotFoundException.class)
-    public ResponseEntity<String> handleAccountNotFoundException(AccountNotFoundException e, WebRequest webRequest) {
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<String> handleAccountNotFoundException(AccountNotFoundException e) {
+        ErrorMessage errorMessage = new ErrorMessage(e.getMessage());
+        return new ResponseEntity<>(errorMessage.message, HttpStatus.NOT_FOUND);
+    }
+
+    private static class ErrorMessage {
+        private final String message;
+
+        public ErrorMessage(String message) {
+            this.message = message;
+        }
+
+        public String getMessage() {
+            return message;
+        }
     }
 }

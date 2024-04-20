@@ -14,22 +14,30 @@ import java.util.List;
 @Service
 public class AccountService {
     private final AccountMapper accountMapper;
+    private final CustomerService customerService;
     private final BalanceService balanceService;
 
     @Autowired
-    public AccountService(AccountMapper accountMapper, BalanceService balanceService) {
+    public AccountService(CustomerService customerService, AccountMapper accountMapper, BalanceService balanceService) {
+        this.customerService = customerService;
         this.accountMapper = accountMapper;
         this.balanceService = balanceService;
     }
 
-    public Account createAccount(Long customerId, String country, List<String> currencies) {
-        for (String currency : currencies) {
-            try {
-                CurrencyValidator.validateCurrency(currency);
-            } catch (InvalidCurrencyException e) {
-                throw new InvalidResourceFieldException("Account not created due to invalid currency: " + currency + ". List of valid currencies: EUR, SEK, GBP, USD.");
-            }
+    public Account getAccountById(Long accountId) {
+        Account account = accountMapper.getAccountById(accountId);
+
+        if (account == null) {
+            throw new AccountNotFoundException("Account not found.");
         }
+
+        return account;
+    }
+
+    public Account createAccount(Long customerId, String country, List<String> currencies) {
+        validateCurrencies(currencies);
+
+        customerService.createCustomer(customerId);
 
         Account account = new Account(customerId, country);
         accountMapper.saveAccount(account);
@@ -43,13 +51,13 @@ public class AccountService {
         return account;
     }
 
-    public Account getAccountById(Long accountId) {
-        Account account = accountMapper.getAccountById(accountId);
-
-        if (account == null) {
-            throw new AccountNotFoundException("Account not found.");
+    private void validateCurrencies(List<String> currencies) {
+        for (String currency : currencies) {
+            try {
+                CurrencyValidator.validateCurrency(currency);
+            } catch (InvalidCurrencyException e) {
+                throw new InvalidResourceFieldException("Account not created due to invalid currency: " + currency + ". List of valid currencies: EUR, SEK, GBP, USD.");
+            }
         }
-
-        return account;
     }
 }

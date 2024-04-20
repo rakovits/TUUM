@@ -55,15 +55,5 @@ public class Balance {
     public void setAvailableAmount(Double availableAmount) {
         this.availableAmount = availableAmount;
     }
-
-    @Override
-    public String toString() {
-        return "Balance{" +
-                "id=" + id +
-                ", accountId=" + accountId +
-                ", currency='" + currency + '\'' +
-                ", availableAmount=" + availableAmount +
-                '}';
-    }
 }
 

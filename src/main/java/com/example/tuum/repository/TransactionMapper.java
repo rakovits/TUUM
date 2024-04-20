@@ -10,12 +10,6 @@ import java.util.List;
 
 @Mapper
 public interface TransactionMapper {
-    @Select("SELECT * FROM transactions")
-    List<Transaction> getAllTransactions();
-
-    @Select("SELECT * FROM transactions WHERE id = #{id}")
-    Transaction getTransactionById(Long id);
-
     @Select("SELECT * FROM transactions WHERE balanceId = #{balanceId}")
     List<Transaction> getTransactionsByBalanceId(Long balanceId);
 

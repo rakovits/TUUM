@@ -11,7 +11,7 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long balanceId;
-    private Double amount;
+    private Double transactionAmount;
     private String directionOfTransaction;
     private String transactionDescription;
 
@@ -21,7 +21,7 @@ public class Transaction {
 
     public Transaction(Long balanceId, Double amount, String directionOfTransaction, String transactionDescription) {
         this.balanceId = balanceId;
-        this.amount = amount;
+        this.transactionAmount = amount;
         this.directionOfTransaction = directionOfTransaction;
         this.transactionDescription = transactionDescription;
     }
@@ -38,16 +38,12 @@ public class Transaction {
         return balanceId;
     }
 
-    public void setBalanceId(Long balanceId) {
-        this.balanceId = balanceId;
+    public Double getTransactionAmount() {
+        return transactionAmount;
     }
 
-    public Double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Double amount) {
-        this.amount = amount;
+    public void setTransactionAmount(Double amount) {
+        this.transactionAmount = amount;
     }
 
     public String getDirectionOfTransaction() {
@@ -64,16 +60,5 @@ public class Transaction {
 
     public void setTransactionDescription(String transactionDescription) {
         this.transactionDescription = transactionDescription;
-    }
-
-    @Override
-    public String toString() {
-        return "Transaction{" +
-                "id=" + id +
-                ", balanceId=" + balanceId +
-                ", amount=" + amount +
-                ", directionOfTransaction='" + directionOfTransaction + '\'' +
-                ", transactionDescription='" + transactionDescription + '\'' +
-                '}';
     }
 }
