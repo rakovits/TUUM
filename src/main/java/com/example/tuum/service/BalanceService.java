@@ -33,12 +33,22 @@ public class BalanceService {
     }
 
     public List<Balance> getBalancesByAccountId(Long accountId) {
+        List<Balance> balances = balanceMapper.getBalancesByAccountId(accountId);
 
-        return balanceMapper.getBalancesByAccountId(accountId);
+        if (balances.isEmpty()) {
+            throw new BalanceNotFoundException("Balance not found.");
+        }
+
+        return balances;
     }
 
     public Balance getBalanceById(Long balanceId) {
-        return balanceMapper.getBalanceById(balanceId);
+        Balance balance = balanceMapper.getBalanceById(balanceId);
+
+        if (balance == null) {
+            throw new BalanceNotFoundException("Balance not found.");
+        }
+        return balance;
     }
 
     public void updateBalance(Balance balance) {

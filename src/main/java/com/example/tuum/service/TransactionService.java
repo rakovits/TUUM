@@ -84,7 +84,7 @@ public class TransactionService {
         try {
             CurrencyValidator.validateCurrency(currency);
         } catch (InvalidCurrencyException e) {
-            throw new InvalidResourceFieldException("Transaction not created due to invalid currency: " + currency + ". List of valid currencies: EUR, SEK, GBP, USD.");
+            throw new InvalidResourceFieldException("Invalid currency: " + currency + ". List of valid currencies: EUR, SEK, GBP, USD.");
         }
     }
 
@@ -92,7 +92,7 @@ public class TransactionService {
         try {
             TransactionDirectionValidator.validateTransactionDirection(directionOfTransaction);
         } catch (InvalidTransactionDirectionException e) {
-            throw new InvalidResourceFieldException("Transaction not created due to invalid transaction direction: " + directionOfTransaction + ". List of valid transaction directions: IN, OUT.");
+            throw new InvalidResourceFieldException("Invalid transaction direction: " + directionOfTransaction + ". List of valid transaction directions: IN, OUT.");
         }
     }
 
@@ -100,7 +100,7 @@ public class TransactionService {
         try {
             TransactionAmountValidator.validateTransactionAmount(transactionAmount);
         } catch (InvalidTransactionAmountException e) {
-            throw new InvalidResourceFieldException("Transaction not created due to invalid transaction amount: " + transactionAmount + ". The transaction amount must be greater than zero and can have up to two decimal places.");
+            throw new InvalidResourceFieldException("Invalid transaction amount: " + transactionAmount + ". The transaction amount must be greater than zero and can have up to two decimal places.");
         }
     }
 
@@ -108,7 +108,7 @@ public class TransactionService {
         try {
             AccountValidator.validateAccount(accountId, accountService);
         } catch (AccountNotFoundException e) {
-            throw new InvalidResourceFieldException("Transaction not created due to invalid account id: " + accountId + ".");
+            throw new InvalidResourceFieldException("Invalid account id: " + accountId + ".");
         }
     }
 
@@ -116,7 +116,7 @@ public class TransactionService {
         try {
             TransactionDescriptionValidator.validateTransactionDescription(transactionDescription);
         } catch (InvalidTransactionDescriptionException e) {
-            throw new InvalidResourceFieldException("Transaction not created due to missing description.");
+            throw new InvalidResourceFieldException("Missing description.");
         }
     }
 
@@ -124,7 +124,7 @@ public class TransactionService {
         try {
             SufficientFundsValidator.validateSufficientFunds(accountId, transactionAmount, currency, directionOfTransaction, balanceService);
         } catch (InsufficientFundsException e) {
-            throw new InvalidResourceFieldException("Transaction not created due to insufficient funds.");
+            throw new InvalidResourceFieldException("Insufficient funds.");
         }
     }
 }

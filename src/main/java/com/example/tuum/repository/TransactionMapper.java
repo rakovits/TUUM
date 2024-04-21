@@ -13,7 +13,7 @@ public interface TransactionMapper {
     @Select("SELECT * FROM transactions WHERE balanceId = #{balanceId}")
     List<Transaction> getTransactionsByBalanceId(Long balanceId);
 
-    @Insert("INSERT INTO transactions (balanceId, amount, directionOfTransaction, transactionDescription) VALUES (#{balanceId}, #{amount}, #{directionOfTransaction}, #{transactionDescription})")
+    @Insert("INSERT INTO transactions (balanceId, transactionAmount, directionOfTransaction, transactionDescription) VALUES (#{balanceId}, #{transactionAmount}, #{directionOfTransaction}, #{transactionDescription})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void saveTransaction(Transaction transaction);
 }

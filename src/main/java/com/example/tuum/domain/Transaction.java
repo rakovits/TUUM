@@ -19,9 +19,9 @@ public class Transaction {
 
     }
 
-    public Transaction(Long balanceId, Double amount, String directionOfTransaction, String transactionDescription) {
+    public Transaction(Long balanceId, Double transactionAmount, String directionOfTransaction, String transactionDescription) {
         this.balanceId = balanceId;
-        this.transactionAmount = amount;
+        this.transactionAmount = transactionAmount;
         this.directionOfTransaction = directionOfTransaction;
         this.transactionDescription = transactionDescription;
     }
@@ -38,12 +38,16 @@ public class Transaction {
         return balanceId;
     }
 
+    public void setBalanceId(Long balanceId) {
+        this.balanceId = balanceId;
+    }
+
     public Double getTransactionAmount() {
         return transactionAmount;
     }
 
-    public void setTransactionAmount(Double amount) {
-        this.transactionAmount = amount;
+    public void setTransactionAmount(Double transactionAmount) {
+        this.transactionAmount = transactionAmount;
     }
 
     public String getDirectionOfTransaction() {
